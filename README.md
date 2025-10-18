@@ -1,4 +1,4 @@
-## stage0 — Profile API
+## Dynamic Profile API
 
 Single-file FastAPI app exposing GET /me.
 
@@ -39,5 +39,3 @@ Notes
 - Timestamp is current UTC in ISO8601 with Z suffix.
 - Cat fact is fetched on every request; a fallback message is returned if upstream fails.
 - ENV vars keep personal info out of source.
-```
-
