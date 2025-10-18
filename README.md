@@ -1,45 +1,50 @@
-## stage0 — Profile API (concise)
+# Stage 0 Profile API
 
-Single-file FastAPI app exposing GET /me.
+FastAPI service that returns profile info + a random cat fact.
 
-Quick start
+## Setup
 
-Dependencies: fastapi[standard], python-dotenv, uvicorn.
+**Dependencies:** `fastapi[standard]`, `python-dotenv`, `uvicorn`
 
-1. Create `.env` with EMAIL, NAME, STACK.
-2. Create and activate a virtualenv, then install:
+1. Create `.env` file:
+   ```env
+   EMAIL=your@email.com
+   NAME=Your Name
+   STACK=Python/FastAPI
+   ```
 
-```powershell
-py -m venv .venv
-.venv\Scripts\Activate.ps1
-pip install -e .
-```
+2. Install:
+   ```powershell
+   py -m venv .venv
+   .venv\Scripts\Activate.ps1
+   pip install -e .
+   ```
 
-Run:
+3. Run:
+   ```powershell
+   uvicorn server:app --reload --host 0.0.0.0 --port 8000
+   ```
 
-```powershell
-uvicorn server:app --reload --host 0.0.0.0 --port 8000
-```
+## API
 
-Endpoint
+**GET /me**
 
-- GET /me — returns 200 with JSON:
+Returns your profile with a cat fact from [catfact.ninja](https://catfact.ninja/fact).
 
+Response:
 ```json
 {
-	"status": "success",
-	"user": {"email": "you@example.com", "name": "Your Full Name", "stack": "Python/FastAPI"},
-	"timestamp": "2025-10-15T12:34:56.789Z",
-	"fact": "A cat fact fetched from https://catfact.ninja/fact"
+  "status": "success",
+  "user": {
+    "email": "your@email.com",
+    "name": "Your Name",
+    "stack": "Python/FastAPI"
+  },
+  "timestamp": "2025-10-18T12:34:56.789Z",
+  "fact": "Cats sleep 70% of their lives."
 }
 ```
 
-Notes
-
-- Timestamp is current UTC in ISO8601 with Z suffix.
-- Cat fact is fetched on every request; a fallback message is returned if upstream fails.
-- ENV vars keep personal info out of source.
-
-If you want, I can also add a one-line deploy note for your chosen host.
-```
-
+- Timestamp is current UTC in ISO 8601 format
+- New cat fact fetched on every request
+- Fallback message if API fails
