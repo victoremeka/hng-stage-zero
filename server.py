@@ -45,7 +45,7 @@ async def me() -> JSONResponse:
         print(f"Error: {e}")
         
 
-    timestamp = datetime.now(timezone.utc).isoformat()
+    timestamp = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
     headers={
         "Content-Type":"application/json"
     }
